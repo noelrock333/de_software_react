@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { useReducer } from 'react';
+import Counter from './components/Counter';
+import CounterTitle from './components/CounterTitle';
+import CounterInput from './components/CounterInput';
+import TodoList from './components/TodoList';
+import counterReducer, { initialState } from './reducers/counter'
+import { Provider } from './contextStore'
 
 function App() {
+  const [state, dispatch] = useReducer(counterReducer, initialState);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider value={{ state, dispatch }}>
+      <CounterTitle />
+      <Counter />
+      <CounterInput />
+      <TodoList />
+    </Provider>
   );
 }
 
